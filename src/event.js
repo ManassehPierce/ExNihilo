@@ -1,4 +1,8 @@
-// event.js
+/* event.js
+  @author Manasseh Pierce
+  @description Defines event emitter class
+*/
+
 class EventEmitter {
 	constructor() {
 		this.listeners = new Map();

@@ -1,10 +1,12 @@
-// blockentity.js
+/* blockentity.js
+  @author Manasseh Pierce
+  @description Defines block entities
+*/
 
 var BLOCKENTITIES = {};
 
-class BlockEntity extends EventEmitter {
+class BlockEntity {
 	constructor(x, y, z) {
-		super();
 		this.x = x, this.y = y, this.z = z;
 		this.label = [x, y, z].join(',');
 		this.tags = {};
@@ -50,4 +52,14 @@ function removeBlockEntity(x, y, z) {
 		return true;
 	}
 	return false;
+}
+
+function saveBlockEntities() {
+	let content = JSON.stringify(BLOCKENTITIES, null, 4);
+	ModPE.saveWorldFile('blockentities.json', content);
+}
+
+function loadBlockEntities() {
+	let content = ModPE.loadWorldFile('blockentities.json');
+	BLOCKENTITIES = JSON.parse(content);
 }
