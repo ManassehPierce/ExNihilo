@@ -8,7 +8,7 @@ var BARRELS = [];
 
 const BARREL_MAX_COMPOSTING_TIME = 1000;
 const BARREL_MAX_FLUID = 1000;
-const BARREL_UPDATE_INTERVAL = 10;
+const BARREL_UPDATE_INTERVAL = 10; // every 10 tick, increase to decrease lag
 
 const MOSS_SPREAD_X_POS = 2;
 const MOSS_SPREAD_X_NEG = -2;

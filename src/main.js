@@ -35,7 +35,7 @@ function destroyBlock(x, y, z, side) {
 	if(blockID === BARREL_BLOCK_ID) {
 		preventDefault();
 		Level.destroyBlock(x, y, z, false);
-		Level.dropItem(x + 0.5, y + 0.5, z + 0.5, 0, BARREL_BLOCK_ID, 1, blockDatax);
+		Level.dropItem(x + 0.5, y + 0.5, z + 0.5, 0, BARREL_BLOCK_ID, 1, blockData);
 		removeBarrel(x, y, z);
 	}
 }

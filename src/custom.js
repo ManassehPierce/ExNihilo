@@ -28,6 +28,8 @@ ModPE.loadWorldFile = function(filename) {
 	return content;
 };
 
+// if the area you are trying to place the block is available (e.g. Air or Tall grass is next to the block you try to place off of)
+// returns true, else false
 Level.canPlaceBlock = function(x, y, z) {
 	if([0, 8, 9, 10, 11, 31, 51, 59, 90, 104, 105, 106, 141, 142, 175].indexOf(Level.getTile(x, y, z)) > 0) {
 		return true;
