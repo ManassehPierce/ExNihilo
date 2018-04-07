@@ -12,12 +12,12 @@ function creativeBlocks() {
 const BARREL_BLOCK_ID = 200
 
 Block.defineBlock(BARREL_BLOCK_ID, 'exnihilope.barrel', [
-	'planks', 0, 'planks', 0, 'planks', 0, 'planks', 0, 'planks', 0, 'planks', 0, 'planks', 0,
-	'planks', 1, 'planks', 1, 'planks', 1, 'planks', 1, 'planks', 1, 'planks', 1, 'planks', 1,
-	'planks', 2, 'planks', 2, 'planks', 2, 'planks', 2, 'planks', 2, 'planks', 2, 'planks', 2,
-	'planks', 3, 'planks', 3, 'planks', 3, 'planks', 3, 'planks', 3, 'planks', 3, 'planks', 3,
-	'planks', 4, 'planks', 4, 'planks', 4, 'planks', 4, 'planks', 4, 'planks', 4, 'planks', 4,
-	'planks', 5, 'planks', 5, 'planks', 5, 'planks', 5, 'planks', 5, 'planks', 5, 'planks', 5
+	['planks', 0], ['planks', 0], ['planks', 0], ['planks', 0], ['planks', 0], ['planks', 0], ['planks', 0],
+	['planks', 1], ['planks', 1], ['planks', 1], ['planks', 1], ['planks', 1], ['planks', 1], ['planks', 1],
+	['planks', 2], ['planks', 2], ['planks', 2], ['planks', 2], ['planks', 2], ['planks', 2], ['planks', 2],
+	['planks', 3], ['planks', 3], ['planks', 3], ['planks', 3], ['planks', 3], ['planks', 3], ['planks', 3],
+	['planks', 4], ['planks', 4], ['planks', 4], ['planks', 4], ['planks', 4], ['planks', 4], ['planks', 4],
+	['planks', 5], ['planks', 5], ['planks', 5], ['planks', 5], ['planks', 5], ['planks', 5], ['planks', 5]
 ], 5, false)
 
 Block.setDestroyTime(BARREL_BLOCK_ID, 2.0)
