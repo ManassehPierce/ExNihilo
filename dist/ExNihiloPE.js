@@ -36,7 +36,7 @@ ModPE.loadWorldFile = function (filename) {
 		content = String(str.toString());
 		fos.close();
 	} else {
-		content = "{}";
+		content = "[]";
 	}
 	return content;
 };
