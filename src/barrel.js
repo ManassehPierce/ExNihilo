@@ -260,6 +260,8 @@ function loadBarrels() {
 
 function removeBarrel(x, y, z) {
 	let barrel = getBarrel(x, y, z);
-	let index = BARRELS.indexOf(barrel);
-	BARRELS.splice(index, 1);
+	if(barrel) {
+		let index = BARRELS.indexOf(barrel);
+		BARRELS.splice(index, 1);
+	}
 }

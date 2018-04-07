@@ -4,11 +4,13 @@
   "description": "",
   "main": "gulpfile.js",
   "dependencies": {
+    "@babel/preset-env": "^7.0.0-beta.44",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.0"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.16.0",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.0"
