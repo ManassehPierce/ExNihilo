@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8,98 +8,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/* Map Polyfill
-   The current version of Rhino that Blocklauncher uses does not support
-   the ECMAScript feature Map, this is the code that makes it possible to use.
-*/
-
-if (!Array.prototype.map) {
-
-	Array.prototype.map = function (callback /*, thisArg*/) {
-
-		var T, A, k;
-
-		if (this == null) {
-			throw new TypeError('this is null or not defined');
-		}
-
-		// 1. Let O be the result of calling ToObject passing the |this| 
-		//    value as the argument.
-		var O = Object(this);
-
-		// 2. Let lenValue be the result of calling the Get internal 
-		//    method of O with the argument "length".
-		// 3. Let len be ToUint32(lenValue).
-		var len = O.length >>> 0;
-
-		// 4. If IsCallable(callback) is false, throw a TypeError exception.
-		// See: http://es5.github.com/#x9.11
-		if (typeof callback !== 'function') {
-			throw new TypeError(callback + ' is not a function');
-		}
-
-		// 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
-		if (arguments.length > 1) {
-			T = arguments[1];
-		}
-
-		// 6. Let A be a new array created as if by the expression new Array(len) 
-		//    where Array is the standard built-in constructor with that name and 
-		//    len is the value of len.
-		A = new Array(len);
-
-		// 7. Let k be 0
-		k = 0;
-
-		// 8. Repeat, while k < len
-		while (k < len) {
-
-			var kValue, mappedValue;
-
-			// a. Let Pk be ToString(k).
-			//   This is implicit for LHS operands of the in operator
-			// b. Let kPresent be the result of calling the HasProperty internal 
-			//    method of O with argument Pk.
-			//   This step can be combined with c
-			// c. If kPresent is true, then
-			if (k in O) {
-
-				// i. Let kValue be the result of calling the Get internal 
-				//    method of O with argument Pk.
-				kValue = O[k];
-
-				// ii. Let mappedValue be the result of calling the Call internal 
-				//     method of callback with T as the this value and argument 
-				//     list containing kValue, k, and O.
-				mappedValue = callback.call(T, kValue, k, O);
-
-				// iii. Call the DefineOwnProperty internal method of A with arguments
-				// Pk, Property Descriptor
-				// { Value: mappedValue,
-				//   Writable: true,
-				//   Enumerable: true,
-				//   Configurable: true },
-				// and false.
-
-				// In browsers that support Object.defineProperty, use the following:
-				// Object.defineProperty(A, k, {
-				//   value: mappedValue,
-				//   writable: true,
-				//   enumerable: true,
-				//   configurable: true
-				// });
-
-				// For best browser support, use the following:
-				A[k] = mappedValue;
-			}
-			// d. Increase k by 1.
-			k++;
-		}
-
-		// 9. return A
-		return A;
-	};
-}
 /* custom.js
   @author Manasseh Pierce
   @description Adds useful functions
@@ -155,18 +63,18 @@ var EventEmitter = function () {
 	}
 
 	_createClass(EventEmitter, [{
-		key: 'addListener',
+		key: "addListener",
 		value: function addListener(label, callback) {
 			this.listeners.has(label) || this.listeners.set(label, []);
 			this.listeners.get(label).push(callback);
 		}
 	}, {
-		key: 'isFunction',
+		key: "isFunction",
 		value: function isFunction() {
 			return typeof obj == 'function' || false;
 		}
 	}, {
-		key: 'removeListener',
+		key: "removeListener",
 		value: function removeListener(label, callback) {
 			var listeners = this.listeners.get(label),
 			    index = void 0;
@@ -185,7 +93,7 @@ var EventEmitter = function () {
 			return false;
 		}
 	}, {
-		key: 'emit',
+		key: "emit",
 		value: function emit(label) {
 			for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
 				args[_key - 1] = arguments[_key];
@@ -223,7 +131,7 @@ function useItem(x, y, z, itemID, blockID, side, itemData, blockData) {
 	if (blockID === BARREL_BLOCK_ID) {
 		var barrel = getBarrel(x, y, z);
 		if (barrel) {
-			clientMessage('x: ' + x + '\ny: ' + y + '\nz: ' + z + '\nmode: ' + barrel.getMode().value);
+			clientMessage("x: " + x + "\ny: " + y + "\nz: " + z + "\nmode: " + barrel.getMode().value);
 		} else {
 			// Uh-Oh! This barrel can't be found, this could only happen if we cant read the previous JSON file,
 			// so it must've been deleted. The only way to fix this is to make the barrel a new one
@@ -234,11 +142,11 @@ function useItem(x, y, z, itemID, blockID, side, itemData, blockData) {
 
 // hook when a block is placed, the parameters are specific to the block that was placed
 function placeBlock(x, y, z, blockID, blockData) {
-	clientMessage('block placed ' + x + ', ' + y + ', ' + z + ', ' + blockID + ', ' + blockData);
+	clientMessage("block placed " + x + ", " + y + ", " + z + ", " + blockID + ", " + blockData);
 	if (Level.getTile(x, y, z) === blockID && Level.getData(x, y, z) === blockData) {
 		if (blockID === BARREL_BLOCK_ID) {
 			var barrel = new Barrel(x, y, z, blockData);
-			clientMessage('barrel placed ' + barrel.getPosition());
+			clientMessage("barrel placed " + barrel.getPosition());
 		}
 	}
 	return;
@@ -338,18 +246,18 @@ var Barrel = function (_EventEmitter) {
 	}
 
 	_createClass(Barrel, [{
-		key: 'getMode',
+		key: "getMode",
 		value: function getMode() {
 			return this.mode;
 		}
 	}, {
-		key: 'setMode',
+		key: "setMode",
 		value: function setMode(mode) {
 			this.mode = mode;
 			this.needsUpdate = true;
 		}
 	}, {
-		key: 'update',
+		key: "update",
 		value: function update() {
 			this.needsUpdate = false;
 
@@ -428,7 +336,7 @@ var Barrel = function (_EventEmitter) {
 			}
 		}
 	}, {
-		key: 'getNearbyBlocks',
+		key: "getNearbyBlocks",
 		value: function getNearbyBlocks(blockID, blockData) {
 			var count = 0;
 			for (var x = -1; x <= 1; x++) {
@@ -443,26 +351,26 @@ var Barrel = function (_EventEmitter) {
 			return count;
 		}
 	}, {
-		key: 'addCompostItem',
+		key: "addCompostItem",
 		value: function addCompostItem(compostItem) {}
 	}, {
-		key: 'isFull',
+		key: "isFull",
 		value: function isFull() {
 			return volume >= 1.0;
 		}
 	}, {
-		key: 'isDone',
+		key: "isDone",
 		value: function isDone() {
 			return timer >= BARREL_MAX_COMPOSTING_TIME;
 		}
 	}, {
-		key: 'giveItem',
+		key: "giveItem",
 		value: function giveItem(itemID, itemCount, itemData) {
 			Level.dropItem(this.x + 0.5, this.y + 1.5, this.z + 0.5, 0.05, itemID, itemCount, itemData);
 			this.resetBarrel();
 		}
 	}, {
-		key: 'getExtractItem',
+		key: "getExtractItem",
 		value: function getExtractItem() {
 			switch (this.getMode()) {
 				case BarrelMode.CLAY:
@@ -507,17 +415,17 @@ var Barrel = function (_EventEmitter) {
 			}
 		}
 	}, {
-		key: 'getVolume',
+		key: "getVolume",
 		value: function getVolume() {
 			return this.volume;
 		}
 	}, {
-		key: 'getTimer',
+		key: "getTimer",
 		value: function getTimer() {
 			return this.timer;
 		}
 	}, {
-		key: 'resetBarrel',
+		key: "resetBarrel",
 		value: function resetBarrel() {
 			this.fluid = 'WATER';
 			this.volume = 0;
@@ -525,7 +433,7 @@ var Barrel = function (_EventEmitter) {
 			this.needsUpdate = true;
 		}
 	}, {
-		key: 'getPosition',
+		key: "getPosition",
 		value: function getPosition() {
 			return [this.x, this.y, this.z].join(',');
 		}
