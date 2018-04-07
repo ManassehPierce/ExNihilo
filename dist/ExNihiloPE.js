@@ -121,6 +121,7 @@ var EventEmitter = function () {
 
 function useItem(x, y, z, itemID, blockID, side, itemData, blockData) {
 	if (itemID < 256) {
+		preventDefault();
 		var sides = [[x, y - 1, z], [x, y + 1, z], [x, y, z - 1], [x, y, z + 1], [x - 1, y, z], [x + 1, y, z]];
 		if (Level.canPlaceBlock(sides[side][0], sides[side][1], sides[side][2])) {
 			placeBlock(sides[side][0], sides[side][1], sides[side][2], itemID, itemData);
@@ -131,15 +132,21 @@ function useItem(x, y, z, itemID, blockID, side, itemData, blockData) {
 		var barrel = getBarrel(x, y, z);
 		if (barrel) {
 			clientMessage("x: " + x + "\ny: " + y + "\nz: " + z + "\nmode: " + barrel.getMode().value);
+		} else {
+			// Uh-Oh! This barrel can't be found, this could only happen if we cant read the previous JSON file,
+			// so it must've been deleted. The only way to fix this is to make the barrel a new one
+			new Barrel(x, y, z, blockData);
 		}
 	}
 }
 
 // hook when a block is placed, the parameters are specific to the block that was placed
 function placeBlock(x, y, z, blockID, blockData) {
+	clientMessage("block placed " + x + ", " + y + ", " + z + ", " + blockID + ", " + blockData);
 	if (Level.getTile(x, y, z) === blockID && Level.getData(x, y, z) === blockData) {
 		if (blockID === BARREL_BLOCK_ID) {
 			var barrel = new Barrel(x, y, z, blockData);
+			clientMessage("barrel placed " + barrel.getPosition());
 		}
 	}
 	return;
