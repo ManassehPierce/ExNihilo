@@ -24,7 +24,8 @@ ModPE.saveWorldFile = function (filename, content) {
 
 ModPE.loadWorldFile = function (filename) {
 	var content = "";
-	if (java.io.File(android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftWorlds/" + Level.getWorldDir() + "/" + filename).exists()) {
+	var path = android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftWorlds/" + Level.getWorldDir() + "/" + filename;
+	if (java.io.File(path).exists()) {
 		var file = new java.io.File(android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftWorlds/" + Level.getWorldDir() + "/" + filename),
 		    fos = new java.io.FileInputStream(file),
 		    str = new java.lang.StringBuilder(),
@@ -34,6 +35,8 @@ ModPE.loadWorldFile = function (filename) {
 		}
 		content = String(str.toString());
 		fos.close();
+	} else {
+		content = "{}";
 	}
 	return content;
 };
@@ -460,7 +463,7 @@ function getBarrel(x, y, z) {
 }
 
 function saveBarrels() {
-	var content = JSON.stringify(BLOCKENTITIES, null, 4);
+	var content = JSON.stringify(BARRELS, null, 4);
 	ModPE.saveWorldFile('barrels.json', content);
 }
 
@@ -486,7 +489,10 @@ function creativeBlocks() {
 }
 
 var BARREL_BLOCK_ID = 200;
-Block.defineBlock(BARREL_BLOCK_ID, 'exnihilope.barrel', ['planks', 0], 5, false);
+
+Block.defineBlock(BARREL_BLOCK_ID, 'exnihilope.barrel', ['planks', 0, 'planks', 0, 'planks', 0, 'planks', 0, 'planks', 0, 'planks', 0, 'planks', 0, 'planks', 1, 'planks', 1, 'planks', 1, 'planks', 1, 'planks', 1, 'planks', 1, 'planks', 1, 'planks', 2, 'planks', 2, 'planks', 2, 'planks', 2, 'planks', 2, 'planks', 2, 'planks', 2, 'planks', 3, 'planks', 3, 'planks', 3, 'planks', 3, 'planks', 3, 'planks', 3, 'planks', 3, 'planks', 4, 'planks', 4, 'planks', 4, 'planks', 4, 'planks', 4, 'planks', 4, 'planks', 4, 'planks', 5, 'planks', 5, 'planks', 5, 'planks', 5, 'planks', 5, 'planks', 5, 'planks', 5], 5, false);
+
 Block.setDestroyTime(BARREL_BLOCK_ID, 2.0);
-BLock.setShape(0.1, 0.0, 0.1, 0.9, 1.0, 0.9);
+Block.setShape(0.1, 0.0, 0.1, 0.9, 1.0, 0.9);
 Item.setStackedByData(BARREL_BLOCK_ID, true);
+Item.setCategory(BARREL_BLOCK_ID, ItemCategory.DECORATION);

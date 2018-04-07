@@ -14,7 +14,8 @@ ModPE.saveWorldFile = function(filename, content) {
 
 ModPE.loadWorldFile = function(filename) {
 	var content = "";
-	if (java.io.File( android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftWorlds/" + Level.getWorldDir() + "/" + filename).exists()) {
+	var path = android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftWorlds/" + Level.getWorldDir() + "/" + filename;
+	if (java.io.File( path ).exists()) {
 		var file = new java.io.File(android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftWorlds/" + Level.getWorldDir() + "/" + filename),
 			fos = new java.io.FileInputStream(file),
 			str = new java.lang.StringBuilder(),
@@ -24,6 +25,8 @@ ModPE.loadWorldFile = function(filename) {
 		}
 		content = String(str.toString());
 		fos.close();
+	} else {
+		content = "{}"
 	}
 	return content;
 };

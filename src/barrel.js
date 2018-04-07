@@ -249,7 +249,7 @@ function getBarrel(x, y, z) {
 }
 
 function saveBarrels() {
-	let content = JSON.stringify(BLOCKENTITIES, null, 4);
+	let content = JSON.stringify(BARRELS, null, 4);
 	ModPE.saveWorldFile('barrels.json', content);
 }
 

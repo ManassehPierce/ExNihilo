@@ -41,14 +41,14 @@ function destroyBlock(x, y, z, side) {
 }
 
 function modTick() {
-	updateBarrels();
+	updateBarrels()
 }
 
 function newLevel() {
-	loadBarrels();
-	creativeBlocks();
+	loadBarrels()
+	creativeBlocks()
 }
 
 function leaveGame() {
-	saveBarrels();
+	saveBarrels()
 }
