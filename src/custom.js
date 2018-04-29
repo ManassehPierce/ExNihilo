@@ -3,7 +3,7 @@
   @description Adds useful functions
 */
 
-ModPE.saveWorldFile = function(filename, content) {
+ModPE.saveWorldFile = function(filename, data) {
 	java.io.File(android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftWorlds/" + Level.getWorldDir() + "/").mkdirs();
 	var newFile = new java.io.File(android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftWorlds/" + Level.getWorldDir() + "/", filename);
 	newFile.createNewFile();
@@ -12,7 +12,7 @@ ModPE.saveWorldFile = function(filename, content) {
 	outWrite.close();
 };
 
-ModPE.loadWorldFile = function(filename) {
+ModPE.readWorldFile = function(filename) {
 	var content = "";
 	var path = android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftWorlds/" + Level.getWorldDir() + "/" + filename;
 	if (java.io.File( path ).exists()) {

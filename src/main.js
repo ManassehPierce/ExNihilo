@@ -12,7 +12,7 @@ function useItem(x, y, z, itemID, blockID, side, itemData, blockData) {
 		}
 	}
 
-	if(blockID === BARREL_BLOCK_ID) {
+	if(blockID === BARREL_ID) {
 		let barrel = getBarrel(x, y, z);
 		if(barrel) {
 			clientMessage(`x: ${x}\ny: ${y}\nz: ${z}\nmode: ${barrel.getMode().value}`);
@@ -28,7 +28,7 @@ function useItem(x, y, z, itemID, blockID, side, itemData, blockData) {
 function placeBlock(x, y, z, blockID, blockData) {
 	clientMessage(`block placed ${x}, ${y}, ${z}, ${blockID}, ${blockData}`);
 	if(Level.getTile(x, y, z) === blockID && Level.getData(x, y, z) === blockData) {
-		if(blockID === BARREL_BLOCK_ID) {
+		if(blockID === BARREL_ID) {
 			let barrel = new Barrel(x, y, z, blockData);
 			clientMessage(`barrel placed ${barrel.getPosition()}`)
 		}
@@ -39,10 +39,10 @@ function placeBlock(x, y, z, blockID, blockData) {
 function destroyBlock(x, y, z, side) {
 	let blockID = Level.getTile(x, y, z);
 	let blockData = Level.getData(x, y, z);
-	if(blockID === BARREL_BLOCK_ID) {
+	if(blockID === BARREL_ID) {
 		preventDefault();
 		Level.destroyBlock(x, y, z, false);
-		Level.dropItem(x + 0.5, y + 0.5, z + 0.5, 0, BARREL_BLOCK_ID, 1, blockData);
+		Level.dropItem(x + 0.5, y + 0.5, z + 0.5, 0, BARREL_ID, 1, blockData);
 		removeBarrel(x, y, z);
 	}
 }

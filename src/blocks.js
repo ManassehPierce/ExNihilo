@@ -3,15 +3,20 @@
   @description defines blocks
 */
 
-function creativeBlocks() {
-	for(var i = 0; i < 6; i ++) {
-		Player.addItemCreativeInv(BARREL_BLOCK_ID, 5, i)
-	}
-}
+const BARREL_ID
+const BARREL_STONE_ID
+const CRUCIBLE_ID
+const UNFIRED_CRUCIBLE_ID
+const DUST_ID
+const LEAVES_INFESTED_ID
+const SIEVE_ID
+const BEE_TRAP_ID
+const BEE_TRAP_TREATED_ID
+const NETHER_GRAVEL_ID
+const ENDER_GRAVEL_ID
 
-const BARREL_BLOCK_ID = 200
 
-Block.defineBlock(BARREL_BLOCK_ID, 'exnihilope.barrel', [
+Block.defineBlock(BARREL_ID, 'exnihilo.barrel', [
 	['planks', 0], ['planks', 0], ['planks', 0], ['planks', 0], ['planks', 0], ['planks', 0], ['planks', 0],
 	['planks', 1], ['planks', 1], ['planks', 1], ['planks', 1], ['planks', 1], ['planks', 1], ['planks', 1],
 	['planks', 2], ['planks', 2], ['planks', 2], ['planks', 2], ['planks', 2], ['planks', 2], ['planks', 2],
@@ -20,7 +25,13 @@ Block.defineBlock(BARREL_BLOCK_ID, 'exnihilope.barrel', [
 	['planks', 5], ['planks', 5], ['planks', 5], ['planks', 5], ['planks', 5], ['planks', 5], ['planks', 5]
 ], 5, false)
 
-Block.setDestroyTime(BARREL_BLOCK_ID, 2.0)
-Block.setShape(0.1, 0.0, 0.1, 0.9, 1.0, 0.9)
-Item.setStackedByData(BARREL_BLOCK_ID, true)
-Item.setCategory(BARREL_BLOCK_ID, ItemCategory.DECORATION)
+Block.defineBlock(BARREL_STONE_ID)
+
+Block.setDestroyTime(BARREL_ID, 2.0)
+Block.setShape(BARREL_ID, 0.1, 0.0, 0.1, 0.9, 1.0, 0.9)
+Item.setStackedByData(BARREL_ID, true)
+Item.setCategory(BARREL_ID, ItemCategory.DECORATION)
+
+function creativeBlocks() {
+	Player.addItemCreativeInv(BARREL_ID, 5, 0)
+}
