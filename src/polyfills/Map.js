@@ -1,81 +1,53 @@
 class Map {
-	constructor( iterable ) {
-		this.array = [];
-		this.keys = [];
-		this._values = [];
-		if( iterable && iterable.length > 0 ) {
-			// check each pair
-			iterable.forEach( pair => {
-				if( pair.length != 2 ) {
-					throw 'all pairs need to be pairs only'
-				} else {
-					this.array.push( pair )
-					this.keys.push( pair[0] )
-					this._values.push( pair[1] )
-				}
-			})
-		}
+	constructor( iterable = [] ) {
+		this.array = iterable.slice()
+		this.keys = [], this._values = []
+		this.array.forEach( pair => { 
+			this.keys.push(pair[0])
+			this._values.push(pair[1])
+		})
 	}
 
-	get length() {
-		return this.array.length
-	}
+	get length() { return this.array.length }
 
-	get size() {
-		return this.array.length
-	}
+	get size() { return this.array.length }
 
-	clear() {
-		this.array = []
-	}
+	clear() { this.array = [] }
 
 	delete( key ) {
-		let val = false
-		let index = this.keys.indexOf( key )
-		if( index > -1 ) {
-			this.array.splice(index, 1)
-			this._values.splice(index, 1)
-			this.keys.splice(index, 1)
-			val = true
+		let i = this.keys.indexOf(key)
+		if( i > -1 ) {
+			this.array.splice(i, 1)
+			this._values.splice(i, 1)
+			this.keys.splice(i, 1)
+			return true
 		}
+		return false
 	}
 
 	entries() {
-		let arr = []
-		this.array.forEach( pair => {
-			arr.push(pair)
-		})
-		return arr
+		return this.array.slice() // thank you slice :|
 	}
 
 	get( key ) {
-		let val = null
-		let index = this.keys.indexOf( key )
-		if( index > -1 ) val = this._values[index]
-		return val
+		if( this.keys.indexOf(key) > -1 ) return this._values[index]
+		return
 	}
 
 	has( key ) {
-		let val = false
-		let index = this.keys.indexOf( key )
-		if( index > -1 ) val = true
-		return val
+		if( this.keys.indexOf(key) > -1 ) return true
+		return false
 	}
 
 	keys() {
-		let arr = []
-		this.keys.forEach( key => {
-			arr.push( key )
-		})
-		return arr
+		return this.keys.slice()
 	}
 
 	set( key, value ) {
-		// see if we have the key yet or not
 		if(this.has(key)) {
-			let index = this.keys.indexOf(key)
-			this._values[index] = value
-			this.array[index][1] = value
+			let i = this.keys.indexOf(key)
+			this._values[i] = value
+			this.array[i][1] = value
 		} else {
 			this.keys.push(key)
 			this._values.push(value)
@@ -85,10 +57,6 @@ class Map {
 	}
 
 	values() {
-		let arr = []
-		this._values.forEach( value => {
-			arr.push( value )
-		})
-		return arr
+		return this._values.slice()
 	}
 }
