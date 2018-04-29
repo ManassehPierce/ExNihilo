@@ -30,7 +30,7 @@ class Map {
 	}
 
 	get( key ) {
-		if( this.keys.indexOf(key) > -1 ) return this._values[index]
+		if( this.keys.indexOf(key) > -1 ) return this._values[this.keys.indexOf(key)]
 		return
 	}
 
